@@ -1,0 +1,52 @@
+* {
+  font-family: 'Proza Libre', sans-serif;
+  color: #333;
+}
+
+body {
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+h4 {
+  margin: 5px 0;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+}
+
+.rowContent {
+  flex-basis: 90%;
+  margin: auto;
+}
+
+.formItems {
+  width: 100%;
+  border: 1px solid #b6b6b6;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.formItems:active {
+  border-color: #562b81;
+}
+
+.nav {
+  background-color: #562b81;
+  height: 20px;
+  height: 50px;
+}
+
+.navContent {
+  margin: 0;
+  color: #f0f0f0;
+}
