@@ -35,8 +35,11 @@ $submit.addEventListener('click', function (event) {
   $form.reset();
   $newEntryImg.setAttribute('src', 'images/placeholder-image-square.jpg');
 
-  localStorage.setItem('data', data);
-  localStorage.setItem('entries', data.entries);
+  var dataJSON = JSON.stringify(data);
+  var entriesJSON = JSON.stringify(data.entries);
+
+  localStorage.setItem('data', dataJSON);
+  localStorage.setItem('entries', entriesJSON);
 
   // console.log('data.entries', data.entries);
   // console.log('data.nextEntryId', data.nextEntryId);

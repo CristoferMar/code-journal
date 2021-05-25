@@ -24,11 +24,6 @@ h4 {
   margin: 5px 0;
 }
 
-.row {
-  width: 100%;
-  display: flex;
-}
-
 .rowContent {
   flex-basis: 90%;
   margin: auto;
@@ -50,7 +45,7 @@ h4 {
 
 .nav {
   background-color: #562b81;
-  height: 45px;
+  height: 40px;
 }
 
 .navContent {
@@ -90,4 +85,5 @@ h4 {
 .justifyRight {
   display: flex;
   justify-content: flex-end;
+  width: 100%;
 }
