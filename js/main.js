@@ -9,7 +9,7 @@ $photoURL.addEventListener('input', function (event) {
   if (event.target.value.length === 0) { $newEntryImg.setAttribute('src', 'images/placeholder-image-square.jpg'); }
 });
 
-var $form = document.querySelector('form');
+var $form = document.querySelector('.newEntry');
 
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
