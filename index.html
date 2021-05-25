@@ -26,15 +26,13 @@
   </header>
 
   <main>
-
-    <div class="row">
-      <div class="rowContent">
-        <h2>New Entry</h2>
-      </div>
-    </div>
-
-
+    <!-- ******************************************************************************** -->
     <div data-view="entry-form">
+      <div class="row">
+        <div class="rowContent">
+          <h2>New Entry</h2>
+        </div>
+      </div>
       <form class="newEntry" action="">
         <div class="row">
           <div class="rowContent">
@@ -58,7 +56,7 @@
         <div class="row">
           <div class="rowContent">
             <div class="justifyRight">
-            <input class="button" type="submit" value="SAVE">
+            <input class="submitButton" type="submit" value="SAVE">
           </div>
         </div>
 
@@ -67,7 +65,46 @@
 
 
     </div>
+    <!-- ******************************************************************************** -->
+    <div data-view="entries">
 
+      <div class="row">
+        <div class="rowContent alignItemsCenter">
+          <h2>Entries</h2>
+          <button class="button">NEW</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <ul class="rowContent">
+          <li>
+            <div class="row justifySpaceBetween">
+              <div class="clmHalf">
+                <img  class="historyImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeNezN--2VYaNp3FqtXU4HtFV3XYdn3U9k4Q&usqp=CAU" alt="">
+              </div>
+              <div class="clmHalf">
+                <h3>Dogs Smell</h3>
+                <p>Dogs have smelled since the dawn of time, when they first learned exist.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row justifySpaceBetween">
+              <div class="clmHalf">
+                <img class="historyImg"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeNezN--2VYaNp3FqtXU4HtFV3XYdn3U9k4Q&usqp=CAU" alt="">
+              </div>
+              <div class="clmHalf">
+                <h3>Dogs Smell</h3>
+                <p>Dogs have smelled since the dawn of time, when they first learned exist.</p>
+              </div>
+            </div>
+
+          </li>
+        </ul>
+      </div>
+
+    </div>
   </main>
 
   <script src="js/data.js"></script>
