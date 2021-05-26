@@ -50,6 +50,12 @@ li {
   justify-content: space-between;
 }
 
+.invisBtn {
+  background-color: transparent;
+  border: none;
+  padding: 3px;
+}
+
 .formItems {
   width: 100%;
   border: 1px solid #b6b6b6;
