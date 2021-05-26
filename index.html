@@ -18,21 +18,22 @@
   <header>
 
     <div class="row nav">
-      <div class="rowContent">
+      <div class="rowContent hoverRight alignItemsCenter">
         <span class="navContent">Code Journal</span>
+        <a class="toEntries" href=""><h6 class="navContent pushright">Entries</h6></a>
       </div>
     </div>
-
   </header>
 
   <main>
     <!-- ******************************************************************************** -->
-    <div data-view="entry-form">
+    <div data-view="entry-form" class="view hidden" id="entry-form">
       <div class="row">
         <div class="rowContent">
           <h2>New Entry</h2>
         </div>
       </div>
+
       <form class="newEntry" action="">
         <div class="row">
           <div class="rowContent">
@@ -56,22 +57,21 @@
         <div class="row">
           <div class="rowContent">
             <div class="justifyRight">
-            <input class="submitButton" type="submit" value="SAVE">
+            <input class="submitButton click" type="submit" value="SAVE">
           </div>
         </div>
 
         </div>
       </form>
 
-
     </div>
     <!-- ******************************************************************************** -->
-    <div data-view="entries">
+    <div data-view="entries" class="view" id="entries">
 
       <div class="row">
         <div class="rowContent alignItemsCenter">
           <h2>Entries</h2>
-          <button class="button">NEW</button>
+          <button class="new button click">NEW</button>
         </div>
       </div>
 
@@ -88,23 +88,25 @@
               </div>
             </div>
           </li>
+          <!-- ******************* DOM TREE DOWN******************* -->
           <li>
             <div class="row justifySpaceBetween">
               <div class="clmHalf">
                 <img class="historyImg"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeNezN--2VYaNp3FqtXU4HtFV3XYdn3U9k4Q&usqp=CAU" alt="">
+                  src="https://image.shutterstock.com/image-photo/man-tshirt-denim-shorts-takes-600w-1748702714.jpg" alt="">
               </div>
               <div class="clmHalf">
-                <h3>Dogs Smell</h3>
+                <h3>Pasley is different than Parsley</h3>
                 <p>Dogs have smelled since the dawn of time, when they first learned exist.</p>
               </div>
             </div>
-
           </li>
+          <!-- ******************* DOM TREE UP ******************* -->
         </ul>
       </div>
-
     </div>
+    <!-- ******************************************************************************** -->
+
   </main>
 
   <script src="js/data.js"></script>

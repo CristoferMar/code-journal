@@ -27,3 +27,35 @@ $form.addEventListener('submit', function (event) {
   $form.reset();
   $newEntryImg.setAttribute('src', 'images/placeholder-image-square.jpg');
 });
+
+// This is for the new button at the top
+var $main = document.querySelector('main');
+// var $buttons = document.querySelectorAll('.click');
+var $allViews = document.querySelectorAll('.view');
+
+// console.log('$allViews:', $allViews);
+// console.log('$main:', $main);
+// console.log('$buttons:', $buttons);
+
+$main.addEventListener('click', clickHandler);
+
+function clickHandler(event) {
+  if (!event.target.matches('.click')) {
+    return;
+  }
+
+  var displayContainer = event.target.closest('.view');
+  var dataView = displayContainer.getAttribute('data-view');
+
+  // perhaps each button should have a class corelating to their destination.
+  // then I can compare that class to each index in $allViews
+
+  for (var i = 0; i < $allViews.length; i++) {
+    if ($allViews[i].getAttribute('data-view') === dataView) {
+      displayContainer.className = 'view hidden';
+    } else {
+      $allViews[i].className = 'view';
+    }
+  }
+
+}
