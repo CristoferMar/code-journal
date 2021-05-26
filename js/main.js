@@ -28,6 +28,8 @@ $form.addEventListener('submit', function (event) {
   $form.reset();
   $newEntryImg.setAttribute('src', 'images/placeholder-image-square.jpg');
 
+  $noEntries.remove();
+
   i = 0;
   $entryGallery.prepend(addEntry());
 
@@ -40,8 +42,6 @@ $form.addEventListener('submit', function (event) {
   }
 });
 
-// swapping between displays
-
 var $body = document.querySelector('body');
 var $allViews = document.querySelectorAll('.view');
 
@@ -53,29 +53,31 @@ function clickHandler(event) {
   event.preventDefault();
   var btnDataView = event.target.getAttribute('data-view');
 
-  for (var i = 0; i < $allViews.length; i++) {
+  for (i = 0; i < $allViews.length; i++) {
     if ($allViews[i].getAttribute('data-view') === btnDataView) {
       $allViews[i].className = 'view';
+      data.view = btnDataView;
     } else {
       $allViews[i].className = 'view hidden';
     }
   }
 }
 
-//   <li> X
-//     <div class="row justifySpaceBetween"> X
-//       <div class="clmHalf"> X
-//         <img class="historyImg" X
+//   <li>
+//     <div class="row justifySpaceBetween">
+//       <div class="clmHalf">
+//         <img class="historyImg"
 //         src="https://image.shutterstock.com/image-photo/man.jpeg" alt="">
 //       </div>
-//       <div class="clmHalf">x
-//         <h3>Pasley is different than Parsley</h3> X
+//       <div class="clmHalf">
+//         <h3>Pasley is different than Parsley</h3>
 //         <p>Dogs have smelled since the dawn of time, when they first learned exist.</p>
 //       </div>
 //     </div>
 //   </li>
 
 var $entryGallery = document.querySelector('.entryGallery');
+var $noEntries = document.querySelector('.noEntries');
 
 function addEntry() {
   var $li = document.createElement('li');
@@ -108,8 +110,20 @@ function addEntry() {
 }
 
 window.addEventListener('DOMContentLoaded', function (event) {
+  if (data.entries.length !== 0) {
+    $noEntries.remove();
+  }
+
   for (i = 0; i < data.entries.length; i++) {
     var $li = addEntry();
     $entryGallery.appendChild($li);
+  }
+
+  for (i = 0; i < $allViews.length; i++) {
+    if ($allViews[i].getAttribute('data-view') === data.view) {
+      $allViews[i].className = 'view';
+    } else {
+      $allViews[i].className = 'view hidden';
+    }
   }
 });

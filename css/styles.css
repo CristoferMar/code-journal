@@ -18,6 +18,8 @@ img {
 
 a {
   text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
 h2 {
@@ -48,12 +50,6 @@ li {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-}
-
-.invisBtn {
-  background-color: transparent;
-  border: none;
-  padding: 3px;
 }
 
 .formItems {
@@ -140,4 +136,8 @@ li {
 
 .justifySpaceBetween {
   justify-content: space-between;
+}
+
+.justifyCenter {
+  justify-content: center;
 }
