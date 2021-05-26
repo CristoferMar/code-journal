@@ -20,13 +20,13 @@
     <div class="row nav">
       <div class="rowContent hoverRight alignItemsCenter">
         <span class="navContent">Code Journal</span>
-        <a class="toEntries" href=""><h6 class="navContent pushright">Entries</h6></a>
+        <a class="swap" data-view="entries" href=""><h6 class="navContent pushright">Entries</h6></a>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- ******************************************************************************** -->
+    <!-- ****************************NEW ENTRY**************************** -->
     <div data-view="entry-form" class="view hidden" id="entry-form">
       <div class="row">
         <div class="rowContent">
@@ -57,7 +57,7 @@
         <div class="row">
           <div class="rowContent">
             <div class="justifyRight">
-            <input class="submitButton click" type="submit" value="SAVE">
+            <input class="submitButton" type="submit" value="SAVE">
           </div>
         </div>
 
@@ -65,13 +65,13 @@
       </form>
 
     </div>
-    <!-- ******************************************************************************** -->
+    <!-- ********************************Entries******************************** -->
     <div data-view="entries" class="view" id="entries">
 
       <div class="row">
         <div class="rowContent alignItemsCenter">
           <h2>Entries</h2>
-          <button class="new button click">NEW</button>
+          <button class="new button swap" data-view="entry-form">NEW</button>
         </div>
       </div>
 

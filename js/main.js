@@ -26,36 +26,34 @@ $form.addEventListener('submit', function (event) {
 
   $form.reset();
   $newEntryImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+
+  for (var i = 0; i < $allViews.length; i++) {
+    if ($allViews[i].getAttribute('data-view') === 'entries') {
+      $allViews[i].className = 'view';
+    } else {
+      $allViews[i].className = 'view hidden';
+    }
+  }
 });
 
-// This is for the new button at the top
-var $main = document.querySelector('main');
-// var $buttons = document.querySelectorAll('.click');
+// swapping between displays
+
+var $body = document.querySelector('body');
 var $allViews = document.querySelectorAll('.view');
 
-// console.log('$allViews:', $allViews);
-// console.log('$main:', $main);
-// console.log('$buttons:', $buttons);
-
-$main.addEventListener('click', clickHandler);
-
+$body.addEventListener('click', clickHandler);
 function clickHandler(event) {
-  if (!event.target.matches('.click')) {
+  if (!event.target.matches('.swap')) {
     return;
   }
 
-  var displayContainer = event.target.closest('.view');
-  var dataView = displayContainer.getAttribute('data-view');
-
-  // perhaps each button should have a class corelating to their destination.
-  // then I can compare that class to each index in $allViews
+  var btnDataView = event.target.getAttribute('data-view');
 
   for (var i = 0; i < $allViews.length; i++) {
-    if ($allViews[i].getAttribute('data-view') === dataView) {
-      displayContainer.className = 'view hidden';
-    } else {
+    if ($allViews[i].getAttribute('data-view') === btnDataView) {
       $allViews[i].className = 'view';
+    } else {
+      $allViews[i].className = 'view hidden';
     }
   }
-
 }
