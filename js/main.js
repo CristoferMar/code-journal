@@ -3,7 +3,6 @@
 
 var $photoURL = document.querySelector('.photoURL');
 var $newEntryImg = document.querySelector('.newEntryImg');
-var i = 0;
 
 $photoURL.addEventListener('input', function (event) {
   $newEntryImg.setAttribute('src', event.target.value);
@@ -11,7 +10,7 @@ $photoURL.addEventListener('input', function (event) {
 });
 
 var $form = document.querySelector('.newEntry');
-
+var i = 0;
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
 
@@ -29,21 +28,20 @@ $form.addEventListener('submit', function (event) {
   $newEntryImg.setAttribute('src', 'images/placeholder-image-square.jpg');
 
   $noEntries.remove();
-
   i = 0;
   $entryGallery.prepend(addEntry());
 
-  for (i = 0; i < $allViews.length; i++) {
-    if ($allViews[i].getAttribute('data-view') === 'entries') {
-      $allViews[i].className = 'view';
+  for (i = 0; i < allViews.length; i++) {
+    if (allViews[i].getAttribute('data-view') === 'entries') {
+      allViews[i].className = 'view';
     } else {
-      $allViews[i].className = 'view hidden';
+      allViews[i].className = 'view hidden';
     }
   }
 });
 
 var $body = document.querySelector('body');
-var $allViews = document.querySelectorAll('.view');
+var allViews = document.querySelectorAll('.view');
 
 $body.addEventListener('click', clickHandler);
 function clickHandler(event) {
@@ -53,12 +51,12 @@ function clickHandler(event) {
   event.preventDefault();
   var btnDataView = event.target.getAttribute('data-view');
 
-  for (i = 0; i < $allViews.length; i++) {
-    if ($allViews[i].getAttribute('data-view') === btnDataView) {
-      $allViews[i].className = 'view';
+  for (i = 0; i < allViews.length; i++) {
+    if (allViews[i].getAttribute('data-view') === btnDataView) {
+      allViews[i].className = 'view';
       data.view = btnDataView;
     } else {
-      $allViews[i].className = 'view hidden';
+      allViews[i].className = 'view hidden';
     }
   }
 }
@@ -119,11 +117,11 @@ window.addEventListener('DOMContentLoaded', function (event) {
     $entryGallery.appendChild($li);
   }
 
-  for (i = 0; i < $allViews.length; i++) {
-    if ($allViews[i].getAttribute('data-view') === data.view) {
-      $allViews[i].className = 'view';
+  for (i = 0; i < allViews.length; i++) {
+    if (allViews[i].getAttribute('data-view') === data.view) {
+      allViews[i].className = 'view';
     } else {
-      $allViews[i].className = 'view hidden';
+      allViews[i].className = 'view hidden';
     }
   }
 });
