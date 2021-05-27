@@ -10,7 +10,7 @@ $photoURL.addEventListener('input', function (event) {
 });
 
 var $form = document.querySelector('.newEntry');
-var i = 0;
+
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
 
@@ -28,16 +28,9 @@ $form.addEventListener('submit', function (event) {
   $newEntryImg.setAttribute('src', 'images/placeholder-image-square.jpg');
 
   $noEntries.remove();
-  i = 0;
-  $entryGallery.prepend(addEntry());
+  $entryGallery.prepend(addEntry(data.entries[0]));
 
-  for (i = 0; i < allViews.length; i++) {
-    if (allViews[i].getAttribute('data-view') === 'entries') {
-      allViews[i].className = 'view';
-    } else {
-      allViews[i].className = 'view hidden';
-    }
-  }
+  swapViews('entries');
 });
 
 var $body = document.querySelector('body');
@@ -51,14 +44,7 @@ function clickHandler(event) {
   event.preventDefault();
   var btnDataView = event.target.getAttribute('data-view');
 
-  for (i = 0; i < allViews.length; i++) {
-    if (allViews[i].getAttribute('data-view') === btnDataView) {
-      allViews[i].className = 'view';
-      data.view = btnDataView;
-    } else {
-      allViews[i].className = 'view hidden';
-    }
-  }
+  swapViews(btnDataView);
 }
 
 //   <li>
@@ -77,7 +63,7 @@ function clickHandler(event) {
 var $entryGallery = document.querySelector('.entryGallery');
 var $noEntries = document.querySelector('.noEntries');
 
-function addEntry() {
+function addEntry(object) {
   var $li = document.createElement('li');
   var $row = document.createElement('div');
   $row.className = 'row justifySpaceBetween';
@@ -88,7 +74,7 @@ function addEntry() {
   clmHalf1.className = 'clmHalf';
   var $img = document.createElement('img');
   $img.className = 'historyImg';
-  $img.setAttribute('src', data.entries[i].photoURL);
+  $img.setAttribute('src', object.photoURL);
 
   clmHalf1.appendChild($img);
   $row.appendChild(clmHalf1);
@@ -96,9 +82,9 @@ function addEntry() {
   var clmHalf2 = document.createElement('div');
   clmHalf2.className = 'clmHalf';
   var $title = document.createElement('h3');
-  $title.textContent = data.entries[i].title;
+  $title.textContent = object.title;
   var $notes = document.createElement('p');
-  $notes.textContent = data.entries[i].notes;
+  $notes.textContent = object.notes;
 
   clmHalf2.appendChild($title);
   clmHalf2.appendChild($notes);
@@ -112,16 +98,22 @@ window.addEventListener('DOMContentLoaded', function (event) {
     $noEntries.remove();
   }
 
-  for (i = 0; i < data.entries.length; i++) {
-    var $li = addEntry();
+  for (var i = 0; i < data.entries.length; i++) {
+    var $li = addEntry(data.entries[i]);
     $entryGallery.appendChild($li);
   }
 
-  for (i = 0; i < allViews.length; i++) {
-    if (allViews[i].getAttribute('data-view') === data.view) {
+  swapViews(data.view);
+
+});
+
+function swapViews(location) {
+  for (var i = 0; i < allViews.length; i++) {
+    if (allViews[i].getAttribute('data-view') === location) {
       allViews[i].className = 'view';
+      data.view = location;
     } else {
       allViews[i].className = 'view hidden';
     }
   }
-});
+}
