@@ -47,24 +47,28 @@ function clickHandler(event) {
   swapViews(btnDataView);
 }
 
-//   <li>
-//     <div class="row justifySpaceBetween">
+// <li class="uniqueEntries" data-entry-id="5">
+//   <div class="row justifySpaceBetween">
+//     <div class="clmHalf">
+//       <img class="historyImg" src="https://image.shutterstock.com/z/stock-vector-crash-test-dummy-step-two-657183796.jpg" alt="">
+//               </div>
 //       <div class="clmHalf">
-//         <img class="historyImg"
-//         src="https://image.shutterstock.com/image-photo/man.jpeg" alt="">
-//       </div>
-//       <div class="clmHalf">
-//         <h3>Pasley is different than Parsley</h3>
-//         <p>Dogs have smelled since the dawn of time, when they first learned exist.</p>
+//         <div class="row justifySpaceBetween alignItemsCenter">
+//           <h3>Dummy Variable</h3>
+//           <h3 class="rotatePrpl swap editing">✎</h3>
+//         </div>
+//         <p>This is a placeholder item that will be removed when we have succesfully added the edit button</p>
 //       </div>
 //     </div>
-//   </li>
+// </li>
 
 var $entryGallery = document.querySelector('.entryGallery');
 var $noEntries = document.querySelector('.noEntries');
 
 function addEntry(object) {
   var $li = document.createElement('li');
+  $li.className = 'uniqueEntries';
+  $li.setAttribute('data-entry-id', object.ID);
   var $row = document.createElement('div');
   $row.className = 'row justifySpaceBetween';
 
@@ -81,12 +85,23 @@ function addEntry(object) {
 
   var clmHalf2 = document.createElement('div');
   clmHalf2.className = 'clmHalf';
+
+  var titleContainer = document.createElement('div');
+  titleContainer.className = 'row justifySpaceBetween alignItemsCenter';
   var $title = document.createElement('h3');
   $title.textContent = object.title;
+  titleContainer.appendChild($title);
+  var editBtn = document.createElement('h3');
+  editBtn.className = 'rotatePrpl swap editing';
+  editBtn.textContent = '✎';
+
+  titleContainer.appendChild($title);
+  titleContainer.appendChild(editBtn);
+  clmHalf2.appendChild(titleContainer);
+
   var $notes = document.createElement('p');
   $notes.textContent = object.notes;
 
-  clmHalf2.appendChild($title);
   clmHalf2.appendChild($notes);
   $row.appendChild(clmHalf2);
 
@@ -99,8 +114,8 @@ window.addEventListener('DOMContentLoaded', function (event) {
   }
 
   for (var i = 0; i < data.entries.length; i++) {
-    var $li = addEntry(data.entries[i]);
-    $entryGallery.appendChild($li);
+    var historyli = addEntry(data.entries[i]);
+    $entryGallery.appendChild(historyli);
   }
 
   swapViews(data.view);
