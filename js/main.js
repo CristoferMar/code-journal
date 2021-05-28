@@ -1,7 +1,21 @@
 /* global data */
 /* exported data */
 
-// image input Functionality below
+window.addEventListener('DOMContentLoaded', function (event) {
+  if (data.entries.length !== 0) {
+    $noEntries.remove();
+  }
+  if (data.editing !== null) {
+    editEntryInStorage(data.editing.ID);
+  }
+
+  for (var i = 0; i < data.entries.length; i++) {
+    var historyli = addEntry(data.entries[i]);
+    $entryGallery.appendChild(historyli);
+  }
+
+  swapViews(data.view);
+});
 
 var $photoURL = document.querySelector('.photoURL');
 var $newEntryImg = document.querySelector('.newEntryImg');
@@ -13,7 +27,7 @@ $photoURL.addEventListener('input', function (event) {
 
 var $form = document.querySelector('.newEntry');
 
-// Adding entry Functionality below
+var currentEditing = false;
 
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
@@ -21,27 +35,50 @@ $form.addEventListener('submit', function (event) {
   var newEntry = {
     title: $form.elements.title.value,
     photoURL: $form.elements.photoURL.value,
-    notes: $form.elements.notes.value,
-    ID: data.nextEntryId
+    notes: $form.elements.notes.value
   };
 
-  data.entries.unshift(newEntry);
-  data.nextEntryId++;
+  if (currentEditing === false) {
+    newEntry.ID = data.nextEntryId;
+    data.entries.unshift(newEntry);
+    data.nextEntryId++;
+    $entryGallery.prepend(addEntry(data.entries[0]));
+  } else {
+    newEntry.ID = currentEditID;
+    for (var i = 0; i < data.entries.length; i++) {
+      // debugger;
+      if (data.entries[i].ID === currentEditID) {
+        data.entries[i] = newEntry;
+        var $allEntries = document.querySelectorAll('.uniqueEntry');
+        for (var v = 0; v < $allEntries.length; v++) {
+          if (parseInt($allEntries[v].getAttribute('data-entry-id')) === currentEditID) {
+            $allEntries[v].replaceWith(addEntry(newEntry));
+          }
+        }
+      }
+    }
+  }
 
-  $form.reset();
-  $newEntryImg.setAttribute('src', 'images/placeholder-image-square.jpg');
-
+  data.editing = null;
+  resetForm();
   $noEntries.remove();
-  $entryGallery.prepend(addEntry(data.entries[0]));
-
   swapViews('entries');
+  currentEditing = false;
 });
 
-// CHANGE VIEW Functionality below
+function resetForm() {
+  NewOrEdit.textContent = 'New Entry';
+  $form.reset();
+  $newEntryImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $form.elements.title.removeAttribute('value');
+  $form.elements.photoURL.removeAttribute('value');
+  $form.elements.notes.textContent = '';
+}
 
 var $body = document.querySelector('body');
 var allViews = document.querySelectorAll('.view');
 var NewOrEdit = document.querySelector('.newOrEdit');
+var currentEditID = null;
 
 $body.addEventListener('click', clickHandler);
 function clickHandler(event) {
@@ -51,17 +88,20 @@ function clickHandler(event) {
   event.preventDefault();
 
   if (event.target.matches('.editing')) {
-    editEntry(parseInt(event.target.closest('li').getAttribute('data-entry-id')));
-  } else { NewOrEdit.textContent = 'New Entry'; }
+    currentEditID = parseInt(event.target.closest('li').getAttribute('data-entry-id'));
+    editEntryInStorage(currentEditID);
+    currentEditing = true;
+  } else {
+    resetForm();
+    data.editing = null;
+  }
 
   var btnDataView = event.target.getAttribute('data-view');
 
   swapViews(btnDataView);
 }
 
-// EDITING Functionality below
-
-function editEntry(editID) {
+function editEntryInStorage(editID) {
   NewOrEdit.textContent = 'Edit Entry';
   for (var i = 0; i < data.entries.length; i++) {
     if (data.entries[i].ID === editID) {
@@ -70,11 +110,10 @@ function editEntry(editID) {
       $form.elements.photoURL.setAttribute('value', data.entries[i].photoURL);
       $form.elements.notes.textContent = data.entries[i].notes;
       $newEntryImg.setAttribute('src', data.entries[i].photoURL);
+      return;
     }
   }
 }
-
-// SWAPPING Functionality below
 
 function swapViews(location) {
   for (var i = 0; i < allViews.length; i++) {
@@ -101,8 +140,6 @@ function swapViews(location) {
 //     </div>
 //   </div>
 // </li>
-
-// LOADING Entry DOM tree to HTML Functionality below
 
 var $entryGallery = document.querySelector('.entryGallery');
 var $noEntries = document.querySelector('.noEntries');
@@ -150,20 +187,3 @@ function addEntry(object) {
 
   return $li;
 }
-
-window.addEventListener('DOMContentLoaded', function (event) {
-  if (data.entries.length !== 0) {
-    $noEntries.remove();
-  }
-  if (data.editing !== null) {
-    editEntry(data.editing.ID);
-  }
-
-  for (var i = 0; i < data.entries.length; i++) {
-    var historyli = addEntry(data.entries[i]);
-    $entryGallery.appendChild(historyli);
-  }
-
-  swapViews(data.view);
-
-});
