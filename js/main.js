@@ -27,8 +27,6 @@ $photoURL.addEventListener('input', function (event) {
 
 var $form = document.querySelector('.newEntry');
 
-var currentEditing = false;
-
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
 
@@ -38,20 +36,19 @@ $form.addEventListener('submit', function (event) {
     notes: $form.elements.notes.value
   };
 
-  if (currentEditing === false) {
+  if (data.editing === null) {
     newEntry.ID = data.nextEntryId;
     data.entries.unshift(newEntry);
     data.nextEntryId++;
     $entryGallery.prepend(addEntry(data.entries[0]));
   } else {
-    newEntry.ID = currentEditID;
+    newEntry.ID = data.editing.ID;
     for (var i = 0; i < data.entries.length; i++) {
-      // debugger;
-      if (data.entries[i].ID === currentEditID) {
+      if (data.entries[i].ID === newEntry.ID) {
         data.entries[i] = newEntry;
         var $allEntries = document.querySelectorAll('.uniqueEntry');
         for (var v = 0; v < $allEntries.length; v++) {
-          if (parseInt($allEntries[v].getAttribute('data-entry-id')) === currentEditID) {
+          if (parseInt($allEntries[v].getAttribute('data-entry-id')) === newEntry.ID) {
             $allEntries[v].replaceWith(addEntry(newEntry));
           }
         }
@@ -63,7 +60,6 @@ $form.addEventListener('submit', function (event) {
   resetForm();
   $noEntries.remove();
   swapViews('entries');
-  currentEditing = false;
 });
 
 function resetForm() {
@@ -78,7 +74,6 @@ function resetForm() {
 var $body = document.querySelector('body');
 var allViews = document.querySelectorAll('.view');
 var NewOrEdit = document.querySelector('.newOrEdit');
-var currentEditID = null;
 
 $body.addEventListener('click', clickHandler);
 function clickHandler(event) {
@@ -88,9 +83,8 @@ function clickHandler(event) {
   event.preventDefault();
 
   if (event.target.matches('.editing')) {
-    currentEditID = parseInt(event.target.closest('li').getAttribute('data-entry-id'));
+    var currentEditID = parseInt(event.target.closest('li').getAttribute('data-entry-id'));
     editEntryInStorage(currentEditID);
-    currentEditing = true;
   } else {
     resetForm();
     data.editing = null;
