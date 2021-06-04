@@ -76,23 +76,66 @@ var allViews = document.querySelectorAll('.view');
 var NewOrEdit = document.querySelector('.newOrEdit');
 
 $body.addEventListener('click', clickHandler);
+var $save = document.querySelector('#save');
+var $remove = document.querySelector('#editRemove');
+var $modal = document.querySelector('#modal');
+
 function clickHandler(event) {
-  if (!event.target.matches('.swap')) {
+  if (!(event.target.matches('.swap') || event.target.matches('.remove'))) {
     return;
   }
   event.preventDefault();
 
+  if (event.target.matches('.remove')) {
+    if (event.target.matches('.delete')) {
+      $modal.className = 'shadow';
+    } else if (event.target.matches('.cancelBtn')) {
+      $modal.className = 'shadow hidden';
+    } else {
+      deleteEntry(data.editing.ID);
+      resetForm();
+      data.editing = null;
+      swapViews('entries');
+      $modal.className = 'shadow hidden';
+    }
+    return;
+  }
+
   if (event.target.matches('.editing')) {
     var currentEditID = parseInt(event.target.closest('li').getAttribute('data-entry-id'));
     editEntryInStorage(currentEditID);
+    $save.className = 'save hidden';
+    $remove.className = 'save';
   } else {
     resetForm();
     data.editing = null;
+    $save.className = 'save';
+    $remove.className = 'save hidden';
   }
 
   var btnDataView = event.target.getAttribute('data-view');
 
   swapViews(btnDataView);
+}
+
+function deleteEntry(chosenID) {
+  var removePosition = null;
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].ID === chosenID) {
+      removePosition = i;
+      break;
+    }
+  }
+  data.entries.splice(removePosition, 1);
+  var $allEntries = document.querySelectorAll('.uniqueEntry');
+  for (i = 0; i < $allEntries.length; i++) {
+    if (parseInt($allEntries[i].getAttribute('data-entry-id')) === chosenID) {
+      $allEntries[i].setAttribute('id', 'clearMe');
+      var elementToRemove = document.querySelector('#clearMe');
+      elementToRemove.remove();
+      break;
+    }
+  }
 }
 
 function editEntryInStorage(editID) {
@@ -130,7 +173,7 @@ function swapViews(location) {
 //           <h3>Dummy Variable</h3>
 //           <h3 class="rotatePrpl swap editing">✎</h3>
 //         </div>
-//         <p>This is a placeholder item that will be removed when we have succesfully added the edit button</p>
+//         <p>This is a placeholder object that will be removed when we have succesfully added the edit button</p>
 //     </div>
 //   </div>
 // </li>

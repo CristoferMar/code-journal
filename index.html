@@ -15,8 +15,16 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <div class="shadow hidden" id="modal">
+    <div class="modal">
+      <div><h5>Are you sure you want to delete this entry?</h5></div>
+      <div class="justifySpaceBetween full-width">
+        <button class="cancelBtn remove">CANCEL</button>
+        <button class="confirmBtn remove">CONFIRM</button>
+      </div>
+    </div>
+  </div>
   <header>
-
     <div class="row nav">
       <div class="rowContent hoverRight alignItemsCenter">
         <span class="navContent">Code Journal</span>
@@ -24,7 +32,6 @@
       </div>
     </div>
   </header>
-<!-- *********************entry-form***************************** -->
   <main>
     <div data-view="entry-form" class="view hidden">
       <div class="row">
@@ -32,7 +39,6 @@
           <h2 class="newOrEdit">New Entry</h2>
         </div>
       </div>
-
       <form class="newEntry" action="">
         <div class="row">
           <div class="rowContent">
@@ -45,52 +51,51 @@
             </div>
           </div>
         </div>
-
         <div class="row">
           <div class="rowContent">
             <h4>Notes</h4>
             <textarea name="notes" cols="30" rows="6" class="notes formItems" required></textarea>
           </div>
         </div>
-
-        <div class="row">
-          <div class="rowContent">
-            <div class="justifyRight">
-            <input class="submitButton" type="submit" value="SAVE">
+        <div id="save" class="save hidden">
+          <div class="row">
+            <div class="rowContent">
+              <div class="justifyRight">
+                <input class="submitButton" type="submit" value="SAVE">
+              </div>
+            </div>
           </div>
         </div>
-
+        <div id="editRemove" class="save">
+          <div class="row">
+            <div class="rowContent">
+              <div class="justifySpaceBetween full-width">
+                <a class="delete remove">Delete Entry</a>
+                <input class="submitButton" type="submit" value="SAVE">
+              </div>
+            </div>
+          </div>
         </div>
       </form>
-
     </div>
-<!-- *********************entries***************************** -->
     <div data-view="entries" class="view">
-
       <div class="row">
         <div class="rowContent alignItemsCenter">
           <h2>Entries</h2>
           <button class="new button swap" data-view="entry-form">NEW</button>
         </div>
       </div>
-
       <div class="row">
         <ul class="rowContent entryGallery">
-
           <li class="noEntries">
             <div class="row">
               <div class="rowContent justifyCenter">No Entries have been recorded.</div>
             </div>
           </li>
-
-          
-
         </ul>
       </div>
     </div>
-
   </main>
-
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
