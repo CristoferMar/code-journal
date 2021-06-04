@@ -141,3 +141,9 @@ li {
 .justifyCenter {
   justify-content: center;
 }
+
+.rotatePrpl {
+  transform: rotate(90deg);
+  color: #562b81;
+  font-size: 1.5rem;
+}
